@@ -2,7 +2,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 
-exports.signup = (req, res, next) => {
+exports.signup = (req, res) => {
   const salt = bcrypt.genSaltSync(10);
   bcrypt.hash(req.body.password, salt).then((hash) => {
     const user = new User({
@@ -22,7 +22,7 @@ exports.signup = (req, res, next) => {
   });
 };
 
-exports.signin = (req, res, next) => {
+exports.signin = (req, res) => {
   User.findOne({ email: req.body.email })
     .then((user) => {
       if (!user) {
@@ -38,8 +38,7 @@ exports.signin = (req, res, next) => {
           }
           const token = jwt.sign(
             { userId: user._id },
-            process.env.TOKEN,
-            { expiresIn: '24h' }
+            process.env.TOKEN
           );
           res.status(200).json({
             userId: user._id,

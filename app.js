@@ -1,5 +1,4 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
 const movieRoutes = require('./routes/movies');
@@ -35,7 +34,7 @@ app.all('*', function(req, res, next) {
 
 app.get('/', (req, res) => {
   res.status(200).json({
-    success: 'YAY! Congratulations! Your Are Connected To Inventory Api. But, You Must Be Authorized To Continue!!!'
+    success: 'YAY! Congratulations! Your Are Connected To Mini-Netflix Api. But, You Must Be Authorized To Continue!!!'
   });
 });
 

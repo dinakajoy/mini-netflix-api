@@ -5,8 +5,10 @@ const movieController = require('../controllers/movies');
 
 router.post('/', auth, movieController.createFavouriteMovie);
 
-router.delete('/:movieId/:userId', auth, movieController.deleteFavouriteMovie);
+router.delete('/:movieId', auth, movieController.deleteFavouriteMovie);
 
-router.get('/:userId', auth, movieController.getFavouriteMovies);
+router.post('/:movieId', auth, movieController.getFavouriteMovie);
+
+router.post('/all/:userId', auth, movieController.getFavouriteMovies);
 
 module.exports = router;
