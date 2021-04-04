@@ -1,0 +1,284 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "A Movie App where users can create an account, view recent movies and add or remove favourite movies if authenticated. ",
+    "version": "1.0.0",
+    "title": "Mini Netflix API",
+    "contact": {
+      "email": "dinakajoy@gmail.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "mini-netflix-by-joy.herokuapp.com",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "auth",
+      "description": "Authenticates users to access the system"
+    },
+    {
+      "name": "favourite movies",
+      "description": "Lists of movies user added as favourite"
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/user/signup": {
+      "post": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "Creates a new user",
+        "description": "",
+        "operationId": "addUser",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Users data to be stored",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Signup"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "User added successfully!"
+          },
+          "501": {
+            "description": "Error message"
+          }
+        }
+      }
+    },
+    "/user/signin": {
+      "post": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "Validates registered user",
+        "description": "",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Users data to be validated",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Signin"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successful"
+          },
+          "401": {
+            "description": "User not found!"
+          }
+        }
+      }
+    },
+    "/movie": {
+      "post": {
+        "tags": [
+          "favourite movies"
+        ],
+        "summary": "Stores user's favourite movie",
+        "description": "",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "MovieId and UserId to store as favourite movie",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FavouriteMovie"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful!"
+          },
+          "401": {
+            "description": "Invalid Login Credentials!"
+          }
+        }
+      }
+    },
+    "/movie/:movieId": {
+      "post": {
+        "tags": [
+          "favourite movies"
+        ],
+        "summary": "To Get favourite movie",
+        "description": "",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "MovieId and UserId to retrieve favourite movie",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FavouriteMovie"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful!"
+          },
+          "401": {
+            "description": "Invalid Login Credentials!"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "favourite movies"
+        ],
+        "summary": "To Delete favourite movie",
+        "description": "",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "MovieId and UserId to delete favourite movie",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FavouriteMovie"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful!"
+          },
+          "401": {
+            "description": "Invalid Login Credentials!"
+          }
+        }
+      }
+    },
+    "/movie/all/:userId": {
+      "post": {
+        "tags": [
+          "favourite movies"
+        ],
+        "summary": "To get favourite movies",
+        "description": "",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "UserId to retrieve all favourite movies",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FavouriteMovies"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful!"
+          },
+          "401": {
+            "description": "Invalid Login Credentials!"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Signup": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "Signin": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "FavouriteMovie": {
+      "type": "object",
+      "properties": {
+        "movieId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "userId": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "FavouriteMovies": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    }
+  }
+}

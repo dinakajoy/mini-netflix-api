@@ -1,6 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const swaggerUI = require('swagger-ui-express');
 
+const swaggerDocument = require('./swagger.json');
 const movieRoutes = require('./routes/movies');
 const userRoutes = require('./routes/user');
 
@@ -31,6 +33,8 @@ app.all('*', function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   next();
 });
+
+app.use('/docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
 app.get('/', (req, res) => {
   res.status(200).json({
