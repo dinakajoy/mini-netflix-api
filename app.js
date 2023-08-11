@@ -14,7 +14,7 @@ app.use(express.urlencoded({
   extended: true
 }));
 
-mongoose.connect(`mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_PASSWORD}@cluster0.65bot.mongodb.net/${process.env.MONGODB_NAME}?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
+mongoose.connect(`mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_PASSWORD}@cluster0.65bot.mongodb.net/${process.env.MONGODB_NAME}?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     console.log('Successfully connected to DB!');
   })
