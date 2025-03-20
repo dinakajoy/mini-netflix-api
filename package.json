@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "dev-server": "nodemon server.js"
+    "dev": "nodemon server.js"
   },
   "author": "Odinaka Joy",
   "license": "ISC",
@@ -22,7 +22,7 @@
     "nodemon": "^3.0.1"
   },
   "engines" : { 
-    "npm" : ">=9.8.1",
-    "node" : ">=16.6.0 <18.0.0"
+    "npm" : ">=11.2.0",
+    "node" : ">=18.0.0 <22.14.0"
   }
 }
